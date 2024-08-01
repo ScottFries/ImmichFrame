@@ -1,4 +1,4 @@
-﻿using Avalonia.Media.Imaging;
+using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using ImmichFrame.Exceptions;
 using ImmichFrame.Helpers;
@@ -72,6 +72,7 @@ public partial class MainViewModel : NavigatableViewModelBase
             {
                 var locationData = new[] {
                     asset.ExifInfo.City,
+                    asset.ExifInfo.State,
                     asset.ExifInfo.Country
                 }.Where(x => !string.IsNullOrWhiteSpace(x));
 
