@@ -1,4 +1,4 @@
-using Avalonia.Media.Imaging;
+﻿using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using ImmichFrame.Exceptions;
 using ImmichFrame.Helpers;
@@ -103,10 +103,12 @@ public partial class MainViewModel : NavigatableViewModelBase
         var weatherInfo = WeatherHelper.GetWeather().Result;
         if (weatherInfo != null)
         {
-            WeatherTemperature = $"{weatherInfo.Main.Temperature:F1}{Environment.NewLine}{weatherInfo.CityName}";
-            WeatherCurrent = $"{string.Join(',', weatherInfo.Weather.Select(x => x.Description))}";
+            string suntime = DateTime.Now > weatherInfo.AdditionalInformation.Sunrise && DateTime.Now < weatherInfo.AdditionalInformation.Sunset ? ("Sunset: " + weatherInfo.AdditionalInformation.Sunset.ToString(Settings.ClockFormat, culture)) : ("Sunrise: " + weatherInfo.AdditionalInformation.Sunrise.ToString(Settings.ClockFormat, culture));
+			WeatherTemperature = $"{weatherInfo.Main.Temperature:F1} ({weatherInfo.Main.FeelsLike}){Environment.NewLine}Wind: {weatherInfo.Wind.Speed} {weatherInfo.Wind.Direction}{Environment.NewLine}Clouds: {weatherInfo.Clouds.All}%";
+            WeatherCurrent = $"{CultureInfo.CurrentCulture.TextInfo.ToTitleCase(string.Join(',', weatherInfo.Weather.Select(x => x.Description)))}{Environment.NewLine}{suntime}";
         }
-    }
+
+	}
 
     public void NavigateSettingsPageAction()
     {
