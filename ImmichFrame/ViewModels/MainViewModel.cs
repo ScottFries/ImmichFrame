@@ -104,6 +104,7 @@ public partial class MainViewModel : NavigatableViewModelBase
             {
                 var locationData = new[] {
                     asset.ExifInfo.City,
+                    asset.ExifInfo.State?.Split(", ").Last(),
                     asset.ExifInfo.Country
                 }.Where(x => !string.IsNullOrWhiteSpace(x));
 
