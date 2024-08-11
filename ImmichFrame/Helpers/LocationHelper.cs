@@ -106,8 +106,15 @@ namespace ImmichFrame.Helpers
 
         public static string GetLocationString(ImmichFrame.Core.Api.ExifResponseDto exifInfo)
         {
-            string country = GetCountryCode(exifInfo.Country);
-            string state = exifInfo.State?.Split(", ").Last() ?? string.Empty;
+            var settings = Settings.CurrentSettings;
+
+            string country = settings.ShowCountry ? exifInfo.Country : string.Empty;
+            if (settings.AbbreviateCountry)
+            {
+                country = GetCountryCode(country);
+            }
+
+            string state = settings.ShowState ? exifInfo.State?.Split(", ").Last() ?? string.Empty : string.Empty;
             if (country == "USA")
             {
                 state = GetUSAStateCode(state);
@@ -116,6 +123,8 @@ namespace ImmichFrame.Helpers
             {
                 state = GetCANStateCode(state);
             }
+
+            string city = settings.ShowCity ? exifInfo.City : string.Empty;
 
             return string.Join(", ", new[] { exifInfo.City, state, country }.Where(part => !string.IsNullOrWhiteSpace(part)));
         }

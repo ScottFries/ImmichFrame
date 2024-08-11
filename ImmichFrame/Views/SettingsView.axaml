@@ -149,14 +149,14 @@
           <NumericUpDown Value="{Binding Settings.ImageDescFontSize}" KeyDown="NumericUpDown_KeyDown" />
           <TextBlock Text="ShowImageLocation"/>
           <CheckBox IsChecked="{Binding Settings.ShowImageLocation}" />
-          <TextBlock Text="ImageLocationFormat"/>
-          <ComboBox SelectedItem="{Binding Settings.ImageLocationFormat}" ItemsSource="{Binding ImageLocationOptions}" HorizontalAlignment="Stretch"  >
-            <ComboBox.ItemTemplate>
-              <DataTemplate>
-                <TextBlock Text="{Binding}" />
-              </DataTemplate>
-            </ComboBox.ItemTemplate>
-          </ComboBox>
+					<TextBlock Text="ShowCity"/>
+					<CheckBox IsChecked="{Binding Settings.ShowCity}" />
+					<TextBlock Text="ShowState"/>
+					<CheckBox IsChecked="{Binding Settings.ShowState}" />
+					<TextBlock Text="ShowCountry"/>
+					<CheckBox IsChecked="{Binding Settings.ShowCountry}" />
+					<TextBlock Text="AbbreviateCountry"/>
+					<CheckBox IsChecked="{Binding Settings.AbbreviateCountry}" />
           <TextBlock Text="ImageLocationFontSize"/>
           <NumericUpDown Value="{Binding Settings.ImageLocationFontSize}" KeyDown="NumericUpDown_KeyDown" />
         </StackPanel>
