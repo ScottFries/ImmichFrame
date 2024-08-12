@@ -1,4 +1,4 @@
-﻿using Avalonia.Media;
+using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -8,6 +8,7 @@ using ImmichFrame.Core.Interfaces;
 using ImmichFrame.Core.Logic;
 using ImmichFrame.Helpers;
 using ImmichFrame.Models;
+using OpenWeatherMap.Extensions;
 using System;
 using System.Globalization;
 using System.IO;
@@ -170,13 +171,19 @@ public partial class MainViewModel : NavigatableViewModelBase
     {
         LiveTime = DateTime.Now.ToString(Settings.ClockFormat, culture);
     }
+    public static string DegreesToCardinal(double degrees)
+    {
+        string[] caridnals = { "N", "NE", "E", "SE", "S", "SW", "W", "NW", "N" };
+        return caridnals[(int)Math.Round(((double)degrees % 360) / 45)];
+    }
     public async void WeatherTick(object? state)
     {
         var weatherInfo = await WeatherHelper.GetWeather();
         if (weatherInfo != null)
         {
-            WeatherTemperature = $"{weatherInfo.Main.Temperature.ToString("F0").Replace(" ", "")}";
-            WeatherCurrent = $"{string.Join(',', weatherInfo.Weather.Select(x => x.Description))}";
+            string suntime = DateTime.Now > weatherInfo.AdditionalInformation.Sunrise && DateTime.Now < weatherInfo.AdditionalInformation.Sunset ? ("Sunset: " + weatherInfo.AdditionalInformation.Sunset.ToString(Settings.ClockFormat, culture)) : ("Sunrise: " + weatherInfo.AdditionalInformation.Sunrise.ToString(Settings.ClockFormat, culture));
+            WeatherTemperature = $"{weatherInfo.Main.Temperature.ToString("F1").Replace(" ", "")} ({weatherInfo.Main.FeelsLike.ToString("F1").Replace(" ", "")})";
+            WeatherCurrent = $"{culture.TextInfo.ToTitleCase(string.Join(',', weatherInfo.Weather.Select(x => x.Description)))}{Environment.NewLine}Wind: {weatherInfo.Wind.Speed:F0} {DegreesToCardinal(weatherInfo.Wind.Direction.Degrees)}{Environment.NewLine}Clouds: {weatherInfo.Clouds.All}";
             var iconId = $"{string.Join(',', weatherInfo.Weather.Select(x => x.IconId))}";
             WeatherImage = new Bitmap(AssetLoader.Open(AssetLoader.Exists(new Uri($"avares://ImmichFrame/Assets/WeatherIcons/{iconId}.png"))
            ? new Uri($"avares://ImmichFrame/Assets/WeatherIcons/{iconId}.png")
