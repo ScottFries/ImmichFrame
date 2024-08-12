@@ -148,7 +148,7 @@ public partial class MainViewModel : NavigatableViewModelBase
         {
             string suntime = DateTime.Now > weatherInfo.AdditionalInformation.Sunrise && DateTime.Now < weatherInfo.AdditionalInformation.Sunset ? ("Sunset: " + weatherInfo.AdditionalInformation.Sunset.ToString(Settings.ClockFormat, culture)) : ("Sunrise: " + weatherInfo.AdditionalInformation.Sunrise.ToString(Settings.ClockFormat, culture));
             WeatherTemperature = $"{weatherInfo.Main.Temperature.ToString("F1").Replace(" ", "")} ({weatherInfo.Main.FeelsLike.ToString("F1").Replace(" ", "")})";
-            WeatherCurrent = $"{culture.TextInfo.ToTitleCase(string.Join(',', weatherInfo.Weather.Select(x => x.Description)))}{Environment.NewLine}Wind: {weatherInfo.Wind.Speed:F0} {DegreesToCardinal(weatherInfo.Wind.Direction.Degrees)}{Environment.NewLine}Clouds: {weatherInfo.Clouds.All}";
+            WeatherCurrent = $"{culture.TextInfo.ToTitleCase(string.Join(',', weatherInfo.Weather.Select(x => x.Description)))}{Environment.NewLine}{weatherInfo.Clouds.All} - {weatherInfo.Wind.Speed:F0} {DegreesToCardinal(weatherInfo.Wind.Direction.Degrees)}";
             var iconId = $"{string.Join(',', weatherInfo.Weather.Select(x => x.IconId))}";
             WeatherImage = await ImageHelper.LoadImageFromWeb(new Uri($"https://openweathermap.org/img/wn/{iconId}.png"));
         }
