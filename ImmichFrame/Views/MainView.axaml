@@ -48,16 +48,40 @@
     <Button x:Name="btnSettings" Grid.Column="1" Grid.Row="0" Command="{Binding NavigateSettingsPageCommand}" HotKey="Up"/>
     <StackPanel Grid.Column="0" Grid.Row="2" Margin="10" VerticalAlignment="Bottom" >
       <StackPanel Orientation="Horizontal">
-        <TextBlock x:Name="txtWeatherTemperature" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsVisible="{Binding Settings.ShowWeather}" Text="{Binding WeatherTemperature}" FontSize="{Binding Settings.WeatherFontSize}"/>
-        <Image Source="{Binding WeatherImage}" VerticalAlignment="Center" MaxWidth="30" Margin="5,0"/>
+        <TextBlock x:Name="txtWeatherTemperature" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsVisible="{Binding Settings.ShowWeather}" Text="{Binding WeatherTemperature}" FontSize="{Binding Settings.WeatherFontSize}">
+          <TextBlock.Background>
+            <SolidColorBrush Color="White" Opacity="0.2" />
+          </TextBlock.Background>
+          <Image Source="{Binding WeatherImage}" VerticalAlignment="Center" MaxWidth="30" Margin="5,0"/>
+		    </TextBlock>
       </StackPanel>
-      <TextBlock x:Name="txtWeatherCurrent" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsVisible="{Binding Settings.ShowWeatherDescription}" Text="{Binding WeatherCurrent}" FontSize="{Binding Settings.WeatherFontSize}"/>
-      <TextBlock x:Name="txtLiveTime" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsVisible="{Binding Settings.ShowClock}" Text="{Binding LiveTime}" FontSize="{Binding Settings.ClockFontSize}"/>
+      <TextBlock x:Name="txtWeatherCurrent" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsVisible="{Binding Settings.ShowWeatherDescription}" Text="{Binding WeatherCurrent}" FontSize="{Binding Settings.WeatherFontSize}">
+		<TextBlock.Background>
+		  <SolidColorBrush Color="White" Opacity="0.2" />
+		</TextBlock.Background>
+	  </TextBlock>
+      <TextBlock x:Name="txtLiveTime" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsVisible="{Binding Settings.ShowClock}" Text="{Binding LiveTime}" FontSize="{Binding Settings.ClockFontSize}">
+	    <TextBlock.Background>
+		  <SolidColorBrush Color="White" Opacity="0.2" />
+	    </TextBlock.Background>
+	  </TextBlock>
     </StackPanel>
-    <TextBlock x:Name="txtImageDate" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" IsVisible="{Binding Settings.ShowPhotoDate}" Text="{Binding ImageDate}" FontSize="{Binding Settings.PhotoDateFontSize}"/>
-    <TextBlock x:Name="txtImageDesc" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10" IsVisible="{Binding Settings.ShowImageDesc}" Text="{Binding ImageDesc}" FontSize="{Binding Settings.ImageDescFontSize}"/>
+    <TextBlock x:Name="txtImageDate" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" IsVisible="{Binding Settings.ShowPhotoDate}" Text="{Binding ImageDate}" FontSize="{Binding Settings.PhotoDateFontSize}">
+	  <TextBlock.Background>
+		<SolidColorBrush Color="White" Opacity="0.2" />
+	  </TextBlock.Background>
+	</TextBlock>
+    <TextBlock x:Name="txtImageDesc" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10" IsVisible="{Binding Settings.ShowImageDesc}" Text="{Binding ImageDesc}" FontSize="{Binding Settings.ImageDescFontSize}">
+	  <TextBlock.Background>
+		<SolidColorBrush Color="White" Opacity="0.2" />
+	  </TextBlock.Background>
+	</TextBlock>
     <StackPanel Grid.Column="0" Grid.Row="0" Margin="10" VerticalAlignment="Top" IsVisible="{Binding Settings.ShowImageLocation}">
-      <TextBlock x:Name="txtImageLocation" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" Text="{Binding ImageLocation}" FontSize="{Binding Settings.ImageLocationFontSize}"/>
+      <TextBlock x:Name="txtImageLocation" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" Text="{Binding ImageLocation}" FontSize="{Binding Settings.ImageLocationFontSize}">
+		<TextBlock.Background>
+		  <SolidColorBrush Color="White" Opacity="0.2" />
+		</TextBlock.Background>
+	  </TextBlock>
     </StackPanel>
   </Grid>
 </UserControl>
